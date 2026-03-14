@@ -10,6 +10,10 @@ from pipescope.utils.fs import iter_files, safe_relpath
 EXCLUDE_DIRS = {".git", "node_modules", ".venv", "venv", "dist", "build", "__pycache__"}
 MAX_BYTES = 1_000_000  # 1MB
 
+# File extensions for which single-line comments (lines starting with #) are stripped
+# before pattern matching to avoid false positives in documentation/example code.
+COMMENT_STRIPPABLE_EXTENSIONS = {".py", ".js", ".ts", ".yml", ".yaml", ".env"}
+
 # Extremely common weak/default secrets
 WEAK_VALUES = {
     "secret", "changeme", "change-me", "default", "password", "admin", "test", "1234", "12345", "qwerty"
@@ -42,6 +46,16 @@ def _read_text(path: Path) -> str:
         return ""
     return data.decode("utf-8", errors="replace")
 
+def _strip_comment_lines(text: str, suffix: str) -> str:
+    """Remove single-line comment lines to avoid false positives from documentation/examples."""
+    if suffix in COMMENT_STRIPPABLE_EXTENSIONS:
+        lines = []
+        for line in text.splitlines(keepends=True):
+            if not line.lstrip().startswith("#"):
+                lines.append(line)
+        return "".join(lines)
+    return text
+
 def scan_for_weak_secrets(root: Path) -> List[Finding]:
     findings: List[Finding] = []
 
@@ -58,6 +72,8 @@ def scan_for_weak_secrets(root: Path) -> List[Finding]:
             continue
         if not text:
             continue
+
+        text = _strip_comment_lines(text, f.suffix.lower())
 
         rel = safe_relpath(f, root)
 
