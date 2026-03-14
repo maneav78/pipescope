@@ -1,11 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.so
+.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env
+.eggs/
+*.egg
 
 # Build artifacts
 *.egg-info/
-build/
 dist/
-__pycache__/
-*.pyc
-.venv/
+build/
+
+# Test / tool caches
+.pytest_cache/
+.mypy_cache/
+.tox/
+
+# PipeScope generated outputs
 *.pdf
 *_results.json
 result_*.json
