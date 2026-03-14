@@ -1,0 +1,11 @@
+
+# Build artifacts
+*.egg-info/
+build/
+dist/
+__pycache__/
+*.pyc
+.venv/
+*.pdf
+*_results.json
+result_*.json
