@@ -1,0 +1,416 @@
+{
+  "tool": "PipeScope",
+  "version": "0.1.0",
+  "target": "/private/var/folders/gh/n1t67tn578n1yyn4m1t9fzz80000gp/T/pipescope-ls8bdmdd/repo",
+  "metadata": {
+    "detected_cicd": [
+      {
+        "kind": "GitHubActions",
+        "path": ".github/workflows/release.yml"
+      },
+      {
+        "kind": "GitHubActions",
+        "path": ".github/workflows/codeql-analysis.yml"
+      },
+      {
+        "kind": "GitHubActions",
+        "path": ".github/workflows/lint-fixer.yml"
+      },
+      {
+        "kind": "GitHubActions",
+        "path": ".github/workflows/update-news-www.yml"
+      },
+      {
+        "kind": "GitHubActions",
+        "path": ".github/workflows/stale.yml"
+      },
+      {
+        "kind": "GitHubActions",
+        "path": ".github/workflows/rebase.yml"
+      },
+      {
+        "kind": "GitHubActions",
+        "path": ".github/workflows/zap_scan.yml"
+      },
+      {
+        "kind": "GitHubActions",
+        "path": ".github/workflows/update-challenges-www.yml"
+      },
+      {
+        "kind": "GitHubActions",
+        "path": ".github/workflows/frontend-bundle-analysis.yml"
+      },
+      {
+        "kind": "GitHubActions",
+        "path": ".github/workflows/ci.yml"
+      },
+      {
+        "kind": "GitHubActions",
+        "path": ".github/workflows/update-challenges-ebook.yml"
+      },
+      {
+        "kind": "GitHubActions",
+        "path": ".github/workflows/lock.yml"
+      },
+      {
+        "kind": "GitLabCI",
+        "path": ".gitlab-ci.yml"
+      }
+    ]
+  },
+  "findings": [
+    {
+      "id": "PS-CICD-GHA-001",
+      "title": "GitHub Actions workflow detected",
+      "severity": "Info",
+      "description": "A GitHub Actions workflow file was found.",
+      "evidence": {
+        "file": ".github/workflows/release.yml"
+      },
+      "recommendation": "Pin actions by SHA, set least-privilege permissions, and avoid long-lived secrets.",
+      "cves": []
+    },
+    {
+      "id": "PS-CICD-GHA-001",
+      "title": "GitHub Actions workflow detected",
+      "severity": "Info",
+      "description": "A GitHub Actions workflow file was found.",
+      "evidence": {
+        "file": ".github/workflows/codeql-analysis.yml"
+      },
+      "recommendation": "Pin actions by SHA, set least-privilege permissions, and avoid long-lived secrets.",
+      "cves": []
+    },
+    {
+      "id": "PS-CICD-GHA-002",
+      "title": "Unpinned GitHub Actions detected",
+      "severity": "Medium",
+      "description": "Floating tags/branches can increase supply-chain risk.",
+      "evidence": {
+        "file": ".github/workflows/codeql-analysis.yml",
+        "uses": [
+          "github/codeql-action/init@v3",
+          "github/codeql-action/autobuild@v3",
+          "github/codeql-action/analyze@v3"
+        ]
+      },
+      "recommendation": "Pin third-party actions to a full commit SHA.",
+      "cves": []
+    },
+    {
+      "id": "PS-GHA-ACT-001",
+      "title": "Unpinned third-party GitHub Action",
+      "severity": "Medium",
+      "description": "Matched rule from PipeScope rule pack.",
+      "evidence": {
+        "file": ".github/workflows/codeql-analysis.yml",
+        "field": "uses_unpinned",
+        "op": "any_true",
+        "value": "true"
+      },
+      "recommendation": "Pin all third-party GitHub Actions to a full commit SHA to reduce supply-chain risk.",
+      "cves": []
+    },
+    {
+      "id": "PS-CICD-GHA-001",
+      "title": "GitHub Actions workflow detected",
+      "severity": "Info",
+      "description": "A GitHub Actions workflow file was found.",
+      "evidence": {
+        "file": ".github/workflows/lint-fixer.yml"
+      },
+      "recommendation": "Pin actions by SHA, set least-privilege permissions, and avoid long-lived secrets.",
+      "cves": []
+    },
+    {
+      "id": "PS-CICD-GHA-001",
+      "title": "GitHub Actions workflow detected",
+      "severity": "Info",
+      "description": "A GitHub Actions workflow file was found.",
+      "evidence": {
+        "file": ".github/workflows/update-news-www.yml"
+      },
+      "recommendation": "Pin actions by SHA, set least-privilege permissions, and avoid long-lived secrets.",
+      "cves": []
+    },
+    {
+      "id": "PS-CICD-GHA-001",
+      "title": "GitHub Actions workflow detected",
+      "severity": "Info",
+      "description": "A GitHub Actions workflow file was found.",
+      "evidence": {
+        "file": ".github/workflows/stale.yml"
+      },
+      "recommendation": "Pin actions by SHA, set least-privilege permissions, and avoid long-lived secrets.",
+      "cves": []
+    },
+    {
+      "id": "PS-CICD-GHA-001",
+      "title": "GitHub Actions workflow detected",
+      "severity": "Info",
+      "description": "A GitHub Actions workflow file was found.",
+      "evidence": {
+        "file": ".github/workflows/rebase.yml"
+      },
+      "recommendation": "Pin actions by SHA, set least-privilege permissions, and avoid long-lived secrets.",
+      "cves": []
+    },
+    {
+      "id": "PS-CICD-GHA-001",
+      "title": "GitHub Actions workflow detected",
+      "severity": "Info",
+      "description": "A GitHub Actions workflow file was found.",
+      "evidence": {
+        "file": ".github/workflows/zap_scan.yml"
+      },
+      "recommendation": "Pin actions by SHA, set least-privilege permissions, and avoid long-lived secrets.",
+      "cves": []
+    },
+    {
+      "id": "PS-CICD-GHA-001",
+      "title": "GitHub Actions workflow detected",
+      "severity": "Info",
+      "description": "A GitHub Actions workflow file was found.",
+      "evidence": {
+        "file": ".github/workflows/update-challenges-www.yml"
+      },
+      "recommendation": "Pin actions by SHA, set least-privilege permissions, and avoid long-lived secrets.",
+      "cves": []
+    },
+    {
+      "id": "PS-CICD-GHA-001",
+      "title": "GitHub Actions workflow detected",
+      "severity": "Info",
+      "description": "A GitHub Actions workflow file was found.",
+      "evidence": {
+        "file": ".github/workflows/frontend-bundle-analysis.yml"
+      },
+      "recommendation": "Pin actions by SHA, set least-privilege permissions, and avoid long-lived secrets.",
+      "cves": []
+    },
+    {
+      "id": "PS-CICD-GHA-001",
+      "title": "GitHub Actions workflow detected",
+      "severity": "Info",
+      "description": "A GitHub Actions workflow file was found.",
+      "evidence": {
+        "file": ".github/workflows/ci.yml"
+      },
+      "recommendation": "Pin actions by SHA, set least-privilege permissions, and avoid long-lived secrets.",
+      "cves": []
+    },
+    {
+      "id": "PS-CICD-GHA-002",
+      "title": "Unpinned GitHub Actions detected",
+      "severity": "Medium",
+      "description": "Floating tags/branches can increase supply-chain risk.",
+      "evidence": {
+        "file": ".github/workflows/ci.yml",
+        "uses": [
+          "coverallsapp/github-action@v2"
+        ]
+      },
+      "recommendation": "Pin third-party actions to a full commit SHA.",
+      "cves": []
+    },
+    {
+      "id": "PS-GHA-ACT-001",
+      "title": "Unpinned third-party GitHub Action",
+      "severity": "Medium",
+      "description": "Matched rule from PipeScope rule pack.",
+      "evidence": {
+        "file": ".github/workflows/ci.yml",
+        "field": "uses_unpinned",
+        "op": "any_true",
+        "value": "true"
+      },
+      "recommendation": "Pin all third-party GitHub Actions to a full commit SHA to reduce supply-chain risk.",
+      "cves": []
+    },
+    {
+      "id": "PS-GHA-RUN-001",
+      "title": "Remote script piped to shell in GitHub Actions",
+      "severity": "High",
+      "description": "Matched rule from PipeScope rule pack.",
+      "evidence": {
+        "file": ".github/workflows/ci.yml",
+        "field": "has_curl_pipe_shell",
+        "op": "equals_ci",
+        "value": "true"
+      },
+      "recommendation": "Avoid curl|bash patterns; use trusted packages, pinned artifacts, and checksum/signature verification.",
+      "cves": []
+    },
+    {
+      "id": "PS-CICD-GHA-001",
+      "title": "GitHub Actions workflow detected",
+      "severity": "Info",
+      "description": "A GitHub Actions workflow file was found.",
+      "evidence": {
+        "file": ".github/workflows/update-challenges-ebook.yml"
+      },
+      "recommendation": "Pin actions by SHA, set least-privilege permissions, and avoid long-lived secrets.",
+      "cves": []
+    },
+    {
+      "id": "PS-CICD-GHA-001",
+      "title": "GitHub Actions workflow detected",
+      "severity": "Info",
+      "description": "A GitHub Actions workflow file was found.",
+      "evidence": {
+        "file": ".github/workflows/lock.yml"
+      },
+      "recommendation": "Pin actions by SHA, set least-privilege permissions, and avoid long-lived secrets.",
+      "cves": []
+    },
+    {
+      "id": "PS-CICD-GL-001",
+      "title": "GitLab CI pipeline detected",
+      "severity": "Info",
+      "description": "A GitLab CI configuration file was found.",
+      "evidence": {
+        "file": ".gitlab-ci.yml"
+      },
+      "recommendation": "Review protected variables, runner security, and avoid secrets in logs.",
+      "cves": []
+    },
+    {
+      "id": "PS-REPO-WEAK-001",
+      "title": "Weak hardcoded secret value detected",
+      "severity": "High",
+      "description": "A secret-like configuration key is assigned a weak/default value ('secret'), which is insecure.",
+      "evidence": {
+        "file": "frontend/src/app/two-factor-auth/two-factor-auth.component.spec.ts",
+        "line": 84,
+        "key": "secret",
+        "value": "secret"
+      },
+      "recommendation": "Replace weak/default secrets with strong random values and load them from a secret manager or protected environment variables. Never hardcode secrets in code.",
+      "cves": []
+    },
+    {
+      "id": "PS-REPO-WEAK-001",
+      "title": "Weak hardcoded secret value detected",
+      "severity": "High",
+      "description": "A secret-like configuration key is assigned a weak/default value ('secret'), which is insecure.",
+      "evidence": {
+        "file": "frontend/src/app/two-factor-auth/two-factor-auth.component.spec.ts",
+        "line": 95,
+        "key": "secret",
+        "value": "secret"
+      },
+      "recommendation": "Replace weak/default secrets with strong random values and load them from a secret manager or protected environment variables. Never hardcode secrets in code.",
+      "cves": []
+    },
+    {
+      "id": "PS-REPO-WEAK-001",
+      "title": "Weak hardcoded secret value detected",
+      "severity": "High",
+      "description": "A secret-like configuration key is assigned a weak/default value ('secret'), which is insecure.",
+      "evidence": {
+        "file": "frontend/src/app/two-factor-auth/two-factor-auth.component.spec.ts",
+        "line": 134,
+        "key": "secret",
+        "value": "secret"
+      },
+      "recommendation": "Replace weak/default secrets with strong random values and load them from a secret manager or protected environment variables. Never hardcode secrets in code.",
+      "cves": []
+    },
+    {
+      "id": "PS-SECRET-RSA-001",
+      "title": "Hardcoded RSA private key",
+      "severity": "Critical",
+      "description": "Matched rule PS-SECRET-RSA-001 (CWE-798)",
+      "evidence": {
+        "file": "lib/insecurity.ts"
+      },
+      "recommendation": "Remove hardcoded secret and rotate affected credentials.",
+      "cves": []
+    },
+    {
+      "id": "PS-DOCKER-CVE-001",
+      "title": "Base image may match known CVEs",
+      "severity": "High",
+      "description": "Image 'node:24 AS installer' heuristically matched 5 CVE(s) based on product/version search.",
+      "evidence": {
+        "file": "Dockerfile",
+        "line": 1,
+        "image": "node:24 AS installer"
+      },
+      "recommendation": "Validate with an image-level scanner such as Trivy or Grype, then upgrade to a fixed image version or digest.",
+      "cves": [
+        {
+          "id": "CVE-2012-2330",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2012-2330"
+        },
+        {
+          "id": "CVE-2013-4660",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2013-4660"
+        },
+        {
+          "id": "CVE-2013-4450",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2013-4450"
+        },
+        {
+          "id": "CVE-2013-7379",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2013-7379"
+        },
+        {
+          "id": "CVE-2014-5256",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2014-5256"
+        }
+      ]
+    },
+    {
+      "id": "PS-DOCKER-005",
+      "title": "Base image tag not pinned",
+      "severity": "Medium",
+      "description": "Base images without explicit tags are mutable over time.",
+      "evidence": {
+        "file": "Dockerfile"
+      },
+      "recommendation": "Pin base image version tag or digest for reproducible builds.",
+      "cves": []
+    },
+    {
+      "id": "PS-DOCKER-005",
+      "title": "Base image tag not pinned",
+      "severity": "Medium",
+      "description": "Base images without explicit tags are mutable over time.",
+      "evidence": {
+        "file": "test/smoke/Dockerfile"
+      },
+      "recommendation": "Pin base image version tag or digest for reproducible builds.",
+      "cves": []
+    },
+    {
+      "id": "PS-DOCKER-006",
+      "title": "Container may run as root",
+      "severity": "High",
+      "description": "Running as root increases blast radius if the container is compromised.",
+      "evidence": {
+        "file": "test/smoke/Dockerfile",
+        "user_instruction_present": false,
+        "user_is_root": false
+      },
+      "recommendation": "Create and switch to a non-root user (USER appuser) and drop Linux capabilities where possible.",
+      "cves": []
+    },
+    {
+      "id": "PS-DOCKERIGNORE-002",
+      "title": ".dockerignore may be incomplete",
+      "severity": "Info",
+      "description": "The .dockerignore file exists but may be missing common exclusions.",
+      "evidence": {
+        "file": ".dockerignore",
+        "missing_examples": [
+          "*.key",
+          ".env",
+          "*.pem"
+        ]
+      },
+      "recommendation": "Update .dockerignore to exclude secrets (.env, *.pem, *.key), VCS (.git), and heavy build artifacts (node_modules, dist, build) to reduce leakage and image size.",
+      "cves": []
+    }
+  ]
+}

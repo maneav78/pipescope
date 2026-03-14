@@ -1,0 +1,156 @@
+{
+  "tool": "PipeScope",
+  "version": "0.1.0",
+  "target": "/Users/mavoyan/Desktop/PipeScope/repos/repo-file-sync-action",
+  "metadata": {
+    "detected_cicd": [
+      {
+        "kind": "GitHubActions",
+        "path": ".github/workflows/latest-tag.yml"
+      },
+      {
+        "kind": "GitHubActions",
+        "path": ".github/workflows/release.yml"
+      },
+      {
+        "kind": "GitHubActions",
+        "path": ".github/workflows/node.yml"
+      },
+      {
+        "kind": "GitHubActions",
+        "path": ".github/workflows/release-scheduler.yml"
+      },
+      {
+        "kind": "GitHubActions",
+        "path": ".github/workflows/dependabot.yml"
+      }
+    ]
+  },
+  "findings": [
+    {
+      "id": "PS-CICD-GHA-001",
+      "title": "GitHub Actions workflow detected",
+      "severity": "Info",
+      "description": "A GitHub Actions workflow file was found.",
+      "evidence": {
+        "file": ".github/workflows/latest-tag.yml"
+      },
+      "recommendation": "Pin actions by SHA, set least-privilege permissions, and avoid long-lived secrets."
+    },
+    {
+      "id": "PS-CICD-GHA-002",
+      "title": "Unpinned GitHub Actions detected",
+      "severity": "Medium",
+      "description": "Floating tags/branches can increase supply-chain risk.",
+      "evidence": {
+        "file": ".github/workflows/latest-tag.yml",
+        "uses": [
+          "Actions-R-Us/actions-tagger@latest"
+        ]
+      },
+      "recommendation": "Pin third-party actions to a full commit SHA."
+    },
+    {
+      "id": "PS-CICD-GHA-001",
+      "title": "GitHub Actions workflow detected",
+      "severity": "Info",
+      "description": "A GitHub Actions workflow file was found.",
+      "evidence": {
+        "file": ".github/workflows/release.yml"
+      },
+      "recommendation": "Pin actions by SHA, set least-privilege permissions, and avoid long-lived secrets."
+    },
+    {
+      "id": "PS-CICD-GHA-002",
+      "title": "Unpinned GitHub Actions detected",
+      "severity": "Medium",
+      "description": "Floating tags/branches can increase supply-chain risk.",
+      "evidence": {
+        "file": ".github/workflows/release.yml",
+        "uses": [
+          "actions/checkout@v2",
+          "actions/setup-node@v2",
+          "c-hive/gha-npm-cache@v1",
+          "actions/checkout@v2",
+          "actions/setup-node@v2",
+          "c-hive/gha-npm-cache@v1"
+        ]
+      },
+      "recommendation": "Pin third-party actions to a full commit SHA."
+    },
+    {
+      "id": "PS-CICD-GHA-001",
+      "title": "GitHub Actions workflow detected",
+      "severity": "Info",
+      "description": "A GitHub Actions workflow file was found.",
+      "evidence": {
+        "file": ".github/workflows/node.yml"
+      },
+      "recommendation": "Pin actions by SHA, set least-privilege permissions, and avoid long-lived secrets."
+    },
+    {
+      "id": "PS-CICD-GHA-002",
+      "title": "Unpinned GitHub Actions detected",
+      "severity": "Medium",
+      "description": "Floating tags/branches can increase supply-chain risk.",
+      "evidence": {
+        "file": ".github/workflows/node.yml",
+        "uses": [
+          "actions/checkout@v2",
+          "actions/setup-node@v2",
+          "c-hive/gha-npm-cache@v1",
+          "actions/checkout@v2",
+          "actions/setup-node@v2",
+          "c-hive/gha-npm-cache@v1"
+        ]
+      },
+      "recommendation": "Pin third-party actions to a full commit SHA."
+    },
+    {
+      "id": "PS-CICD-GHA-001",
+      "title": "GitHub Actions workflow detected",
+      "severity": "Info",
+      "description": "A GitHub Actions workflow file was found.",
+      "evidence": {
+        "file": ".github/workflows/release-scheduler.yml"
+      },
+      "recommendation": "Pin actions by SHA, set least-privilege permissions, and avoid long-lived secrets."
+    },
+    {
+      "id": "PS-CICD-GHA-002",
+      "title": "Unpinned GitHub Actions detected",
+      "severity": "Medium",
+      "description": "Floating tags/branches can increase supply-chain risk.",
+      "evidence": {
+        "file": ".github/workflows/release-scheduler.yml",
+        "uses": [
+          "koj-co/release-scheduler@master"
+        ]
+      },
+      "recommendation": "Pin third-party actions to a full commit SHA."
+    },
+    {
+      "id": "PS-CICD-GHA-001",
+      "title": "GitHub Actions workflow detected",
+      "severity": "Info",
+      "description": "A GitHub Actions workflow file was found.",
+      "evidence": {
+        "file": ".github/workflows/dependabot.yml"
+      },
+      "recommendation": "Pin actions by SHA, set least-privilege permissions, and avoid long-lived secrets."
+    },
+    {
+      "id": "PS-CICD-GHA-002",
+      "title": "Unpinned GitHub Actions detected",
+      "severity": "Medium",
+      "description": "Floating tags/branches can increase supply-chain risk.",
+      "evidence": {
+        "file": ".github/workflows/dependabot.yml",
+        "uses": [
+          "koj-co/dependabot-pr-action@master"
+        ]
+      },
+      "recommendation": "Pin third-party actions to a full commit SHA."
+    }
+  ]
+}

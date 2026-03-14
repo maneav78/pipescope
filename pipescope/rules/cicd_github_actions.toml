@@ -1,0 +1,44 @@
+[[rule]]
+id = "PS-GHA-TRIG-001"
+severity = "HIGH"
+title = "Dangerous trigger: pull_request_target"
+field = "triggers"
+op = "contains"
+value = "pull_request_target"
+recommendation = "Avoid pull_request_target unless you fully understand the security model; prefer pull_request and restrict permissions."
+
+[[rule]]
+id = "PS-GHA-PERM-001"
+severity = "HIGH"
+title = "Workflow requests write-all permissions"
+field = "permissions_raw"
+op = "equals_ci"
+value = "write-all"
+recommendation = "Set least-privilege permissions globally and elevate only per job when required."
+
+[[rule]]
+id = "PS-GHA-ACT-001"
+severity = "MEDIUM"
+title = "Unpinned third-party GitHub Action"
+field = "uses_unpinned"
+op = "any_true"
+value = "true"
+recommendation = "Pin all third-party GitHub Actions to a full commit SHA to reduce supply-chain risk."
+
+[[rule]]
+id = "PS-GHA-RUN-001"
+severity = "HIGH"
+title = "Remote script piped to shell in GitHub Actions"
+field = "has_curl_pipe_shell"
+op = "equals_ci"
+value = "true"
+recommendation = "Avoid curl|bash patterns; use trusted packages, pinned artifacts, and checksum/signature verification."
+
+[[rule]]
+id = "PS-GHA-RUNNER-001"
+severity = "MEDIUM"
+title = "Self-hosted runner used"
+field = "uses_self_hosted_runner"
+op = "equals_ci"
+value = "true"
+recommendation = "Isolate self-hosted runners, avoid running untrusted PRs, and harden runner hosts."

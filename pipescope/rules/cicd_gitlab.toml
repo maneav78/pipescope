@@ -1,0 +1,26 @@
+[[rule]]
+id = "PS-GL-REM-001"
+severity = "HIGH"
+title = "Remote script piped to shell in GitLab CI"
+field = "has_curl_pipe_shell"
+op = "equals_ci"
+value = "true"
+recommendation = "Avoid curl|bash patterns. Use trusted images/artifacts and verify checksums/signatures."
+
+[[rule]]
+id = "PS-GL-SEC-001"
+severity = "HIGH"
+title = "Potential plaintext secrets in .gitlab-ci.yml"
+field = "has_plaintext_secrets"
+op = "equals_ci"
+value = "true"
+recommendation = "Move secrets to masked/protected CI variables or a secret manager; remove hardcoded values."
+
+[[rule]]
+id = "PS-GL-DIND-001"
+severity = "MEDIUM"
+title = "Potential Docker-in-Docker / privileged build patterns"
+field = "has_dind_or_privileged"
+op = "equals_ci"
+value = "true"
+recommendation = "Prefer rootless builders (BuildKit/Kaniko) and isolate runners; avoid privileged jobs."

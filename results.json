@@ -1,0 +1,117 @@
+{
+  "tool": "PipeScope",
+  "version": "0.1.0",
+  "target": "/private/var/folders/gh/n1t67tn578n1yyn4m1t9fzz80000gp/T/pipescope-eh9cf0f0/repo",
+  "metadata": {
+    "detected_cicd": []
+  },
+  "findings": [
+    {
+      "id": "PS-SECRET-RSA-001",
+      "title": "Hardcoded RSA private key",
+      "severity": "Critical",
+      "description": "Matched rule PS-SECRET-RSA-001 (CWE-798)",
+      "evidence": {
+        "file": "src/main/resources/application.yml"
+      },
+      "recommendation": "Remove hardcoded secret and rotate affected credentials."
+    },
+    {
+      "id": "PS-SECRET-RSA-001",
+      "title": "Hardcoded RSA private key",
+      "severity": "Critical",
+      "description": "Matched rule PS-SECRET-RSA-001 (CWE-798)",
+      "evidence": {
+        "file": "src/main/java/com/suisung/shopsuite/common/utils/RSAUtil.java"
+      },
+      "recommendation": "Remove hardcoded secret and rotate affected credentials."
+    },
+    {
+      "id": "PS-SECRET-RSA-001",
+      "title": "Hardcoded RSA private key",
+      "severity": "Critical",
+      "description": "Matched rule PS-SECRET-RSA-001 (CWE-798)",
+      "evidence": {
+        "file": "src/main/java/com/suisung/shopsuite/common/consts/AuthConstant.java"
+      },
+      "recommendation": "Remove hardcoded secret and rotate affected credentials."
+    },
+    {
+      "id": "PS-SECRET-OAUTH-001",
+      "title": "Hardcoded OAuth or client secret",
+      "severity": "High",
+      "description": "Matched rule PS-SECRET-OAUTH-001 (CWE-798)",
+      "evidence": {
+        "file": "src/main/java/com/suisung/shopsuite/common/consts/AuthConstant.java"
+      },
+      "recommendation": "Remove hardcoded secret and rotate affected credentials."
+    },
+    {
+      "id": "PS-SECRET-DB-001",
+      "title": "Hardcoded database password",
+      "severity": "High",
+      "description": "Matched rule PS-SECRET-DB-001 (CWE-798)",
+      "evidence": {
+        "file": "src/test/java/com/suisung/shopsuite/generator/CodeGenerator.java"
+      },
+      "recommendation": "Remove hardcoded secret and rotate affected credentials."
+    },
+    {
+      "id": "PS-COMPOSE-005",
+      "title": "Service publishes ports (review exposure)",
+      "severity": "Medium",
+      "description": "Published ports can expose services publicly depending on host firewall/networking.",
+      "evidence": {
+        "file": "docker-compose.yml",
+        "service": "redis",
+        "ports": [
+          "6379:6379"
+        ]
+      },
+      "recommendation": "Bind only necessary ports, restrict to localhost where possible, and use a reverse proxy/LB with auth."
+    },
+    {
+      "id": "PS-COMPOSE-005",
+      "title": "Service publishes ports (review exposure)",
+      "severity": "Medium",
+      "description": "Published ports can expose services publicly depending on host firewall/networking.",
+      "evidence": {
+        "file": "docker-compose.yml",
+        "service": "mysql",
+        "ports": [
+          "3306:3306"
+        ]
+      },
+      "recommendation": "Bind only necessary ports, restrict to localhost where possible, and use a reverse proxy/LB with auth."
+    },
+    {
+      "id": "PS-COMPOSE-006",
+      "title": "Potential plaintext secrets in docker-compose environment",
+      "severity": "High",
+      "description": "Secret-like environment variables appear to be set to literal values in compose.",
+      "evidence": {
+        "file": "docker-compose.yml",
+        "service": "mysql",
+        "keys": [
+          "MYSQL_ROOT_PASSWORD"
+        ]
+      },
+      "recommendation": "Use env var injection from a secret manager, Docker/Swarm secrets, or external config files with strict access."
+    },
+    {
+      "id": "PS-COMPOSE-005",
+      "title": "Service publishes ports (review exposure)",
+      "severity": "Medium",
+      "description": "Published ports can expose services publicly depending on host firewall/networking.",
+      "evidence": {
+        "file": "docker-compose.yml",
+        "service": "nginx",
+        "ports": [
+          "80:80",
+          "443:443"
+        ]
+      },
+      "recommendation": "Bind only necessary ports, restrict to localhost where possible, and use a reverse proxy/LB with auth."
+    }
+  ]
+}

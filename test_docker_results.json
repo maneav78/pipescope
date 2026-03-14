@@ -1,0 +1,65 @@
+{
+  "tool": "PipeScope",
+  "version": "0.1.0",
+  "target": "/Users/mavoyan/Desktop/PipeScope/test_repo",
+  "metadata": {
+    "detected_cicd": []
+  },
+  "findings": [
+    {
+      "id": "PS-DOCKER-CVE-001",
+      "title": "Base image has known CVEs",
+      "severity": "High",
+      "description": "Image 'ubuntu:20.04' matched 5 CVE(s)",
+      "evidence": {
+        "file": "Dockerfile",
+        "line": 1,
+        "image": "ubuntu:20.04"
+      },
+      "recommendation": "Consider using a newer image or check upstream for fixes.",
+      "cves": [
+        "CVE-2005-0080",
+        "CVE-2006-0176",
+        "CVE-2006-0458",
+        "CVE-2006-1183",
+        "CVE-2006-3378"
+      ]
+    },
+    {
+      "id": "PS-DOCKER-006",
+      "title": "Container may run as root",
+      "severity": "High",
+      "description": "Running as root increases blast radius if the container is compromised.",
+      "evidence": {
+        "file": "Dockerfile",
+        "user_instruction_present": false,
+        "user_is_root": false
+      },
+      "recommendation": "Create and switch to a non-root user (USER appuser) and drop Linux capabilities where possible.",
+      "cves": []
+    },
+    {
+      "id": "PS-DOCKER-007",
+      "title": "COPY . . without .dockerignore",
+      "severity": "Medium",
+      "description": "Copying the whole repo without .dockerignore can bake secrets and unnecessary files into the image.",
+      "evidence": {
+        "file": "Dockerfile"
+      },
+      "recommendation": "Add a .dockerignore excluding secrets (.env, *.pem, *.key), VCS (.git), and build artifacts.",
+      "cves": []
+    },
+    {
+      "id": "PS-DOCKERIGNORE-001",
+      "title": "Missing .dockerignore while copying build context",
+      "severity": "Medium",
+      "description": "A Dockerfile appears to copy the repository context (e.g., COPY . ...), but no .dockerignore file was found. This can bake secrets and unnecessary files into container images.",
+      "evidence": {
+        "file": "Dockerfile(s)",
+        "dockerignore": "missing"
+      },
+      "recommendation": "Add a .dockerignore excluding secrets (.env, *.pem, *.key), VCS (.git), and build artifacts (node_modules, dist, build).",
+      "cves": []
+    }
+  ]
+}

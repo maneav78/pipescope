@@ -1,0 +1,2 @@
+/Users/mavoyan/Desktop/PipeScope/.venv/bin/pipescope repos/gamerpolls.com --web-url http://example.com --jenkins-url http://example.com/jenkins --pdf report.pdf
+

@@ -1,0 +1,24 @@
+{
+  "tool": "PipeScope",
+  "version": "0.1.0",
+  "target": "/Users/mavoyan/Desktop/PipeScope/repos/gamerpolls.com",
+  "metadata": {
+    "detected_cicd": []
+  },
+  "findings": [
+    {
+      "id": "PS-REPO-WEAK-001",
+      "title": "Weak hardcoded secret value detected",
+      "severity": "High",
+      "description": "A secret-like configuration key is assigned a weak/default value ('secret'), which is insecure.",
+      "evidence": {
+        "file": "config/environments/all.js",
+        "line": 58,
+        "key": "secret",
+        "value": "secret"
+      },
+      "recommendation": "Replace weak/default secrets with strong random values and load them from a secret manager or protected environment variables. Never hardcode secrets in code.",
+      "cves": []
+    }
+  ]
+}

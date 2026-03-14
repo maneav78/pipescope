@@ -1,0 +1,2 @@
+[console_scripts]
+pipescope = pipescope.cli:main

@@ -1,0 +1,17 @@
+[[rule]]
+id = "PS-JENK-REM-001"
+severity = "HIGH"
+title = "Remote script piped to shell in Jenkinsfile"
+field = "has_curl_pipe_shell"
+op = "equals_ci"
+value = "true"
+recommendation = "Avoid curl|bash patterns. Use verified artifacts and trusted internal mirrors."
+
+[[rule]]
+id = "PS-JENK-LOG-001"
+severity = "MEDIUM"
+title = "Potential secret leakage to logs"
+field = "has_echo_secret_like"
+op = "equals_ci"
+value = "true"
+recommendation = "Do not echo secret-like env vars. Use credentials bindings and masking."

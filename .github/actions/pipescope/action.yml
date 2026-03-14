@@ -1,0 +1,181 @@
+name: PipeScope Security Scan
+description: >
+  Run PipeScope CI/CD security enumeration, get AI-powered recommendations,
+  and publish a rich job summary — all in one reusable composite action.
+
+branding:
+  icon: shield
+  color: orange
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Inputs
+# ─────────────────────────────────────────────────────────────────────────────
+inputs:
+  target:
+    description: >
+      Local path or remote git URL to scan.
+      Leave empty to run URL-only scans (Jenkins / GitLab / Web).
+    required: false
+    default: ''
+
+  jenkins-url:
+    description: URL of a Jenkins server to scan (e.g. http://jenkins.example.com).
+    required: false
+    default: ''
+
+  gitlab-url:
+    description: URL of a GitLab server to scan (e.g. https://gitlab.example.com).
+    required: false
+    default: ''
+
+  web-url:
+    description: Base URL for web-recon path enumeration.
+    required: false
+    default: ''
+
+  wordlist-name:
+    description: >
+      Built-in wordlist to use for web recon.
+      Valid values: common, quickhits.
+    required: false
+    default: common
+
+  threads:
+    description: Number of parallel threads for web recon.
+    required: false
+    default: '10'
+
+  openai-key:
+    description: >
+      OpenAI API key for LLM-enhanced recommendations.
+      When omitted, rule-based AI recommendations are used (no API call).
+    required: false
+    default: ''
+
+  fail-on-high:
+    description: Exit with code 1 when High or Critical findings are detected.
+    required: false
+    default: 'true'
+
+  json-output:
+    description: Path to write the JSON results file.
+    required: false
+    default: pipescope-results.json
+
+  pdf-output:
+    description: Path to write the PDF report.  Leave empty to skip PDF generation.
+    required: false
+    default: ''
+
+  python-version:
+    description: Python version to use.
+    required: false
+    default: '3.11'
+
+  install-ref:
+    description: >
+      pip install specifier for PipeScope. Defaults to the current directory
+      (works when the action is embedded in the same repo). Override with a
+      PyPI package name or VCS URL when using the action from a different repo.
+    required: false
+    default: '.'
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Outputs
+# ─────────────────────────────────────────────────────────────────────────────
+outputs:
+  findings-count:
+    description: Total number of findings.
+    value: ${{ steps.run-scan.outputs.findings-count }}
+
+  high-count:
+    description: Number of High-severity findings.
+    value: ${{ steps.run-scan.outputs.high-count }}
+
+  critical-count:
+    description: Number of Critical-severity findings.
+    value: ${{ steps.run-scan.outputs.critical-count }}
+
+  json-report:
+    description: Path to the generated JSON report.
+    value: ${{ inputs.json-output }}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Steps
+# ─────────────────────────────────────────────────────────────────────────────
+runs:
+  using: composite
+  steps:
+    # ── 1. Python environment ────────────────────────────────────────────────
+    - name: Set up Python ${{ inputs.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    # ── 2. Install PipeScope ─────────────────────────────────────────────────
+    - name: Install PipeScope
+      shell: bash
+      run: |
+        python -m pip install --upgrade pip
+        pip install "${{ inputs.install-ref }}"
+
+    # ── 3. Build pipescope command ───────────────────────────────────────────
+    - name: Run PipeScope scan
+      id: run-scan
+      shell: bash
+      env:
+        OPENAI_API_KEY: ${{ inputs.openai-key }}
+      run: |
+        CMD="pipescope"
+
+        # Target (optional)
+        if [ -n "${{ inputs.target }}" ]; then
+          CMD="$CMD ${{ inputs.target }}"
+        fi
+
+        # URL-based scanners
+        if [ -n "${{ inputs.jenkins-url }}" ]; then
+          CMD="$CMD --jenkins-url ${{ inputs.jenkins-url }}"
+        fi
+        if [ -n "${{ inputs.gitlab-url }}" ]; then
+          CMD="$CMD --gitlab-url ${{ inputs.gitlab-url }}"
+        fi
+        if [ -n "${{ inputs.web-url }}" ]; then
+          CMD="$CMD --web-url ${{ inputs.web-url }}"
+          CMD="$CMD --wordlist-name ${{ inputs.wordlist-name }}"
+          CMD="$CMD --threads ${{ inputs.threads }}"
+        fi
+
+        # Outputs
+        CMD="$CMD --json ${{ inputs.json-output }}"
+        if [ -n "${{ inputs.pdf-output }}" ]; then
+          CMD="$CMD --pdf ${{ inputs.pdf-output }}"
+        fi
+
+        # Fail-on-high
+        if [ "${{ inputs.fail-on-high }}" = "false" ]; then
+          CMD="$CMD --no-fail-on-high"
+        fi
+
+        # AI always enabled in CI (falls back to rule-based if no key)
+        CMD="$CMD --ai"
+
+        echo "Running: $CMD"
+        eval "$CMD"
+
+    # ── 4. Upload artifacts ──────────────────────────────────────────────────
+    - name: Upload JSON report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: pipescope-json-report
+        path: ${{ inputs.json-output }}
+        if-no-files-found: ignore
+
+    - name: Upload PDF report
+      if: always() && inputs.pdf-output != ''
+      uses: actions/upload-artifact@v4
+      with:
+        name: pipescope-pdf-report
+        path: ${{ inputs.pdf-output }}
+        if-no-files-found: ignore

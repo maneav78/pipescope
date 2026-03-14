@@ -1,0 +1,253 @@
+1. Infrastructure CVE Scanning:
+
+The current CVE scanning is focused on Docker base images within Dockerfiles.
+The requirement to "Use known CVEs to test Jenkins, GitLab versions, and weak configuration endpoints" has not been fully implemented. This would require a more sophisticated mechanism to determine the versions of these services and then query a CVE database for relevant vulnerabilities.
+2. Advanced Web-based Reconnaissance:
+
+The current web-based recon checks for a predefined list of common files and directories.
+The requirement to "Use techniques like directory brute-forcing (dirb, gobuster behavior)" is only partially met. A full implementation would involve using a wordlist to discover non-obvious paths, which would be a more comprehensive approach.
+3. Full CI/CD Plugin Integration:
+
+The tool has been made "CI/CD friendly"by providing console summaries and exiting with an error code on high-severity findings. This allows it to be used in a CI/CD pipeline as a command-line tool.
+The optional requirement to "Let it run as a stage in the pipeline to self-audit on PRs or pushes" as a dedicated plugin (e.g., a native GitHub Action or Jenkins plugin)has not been implemented. This would involve creating a more deeply integrated solution for the specific CI/CD platform.
+In summary, the core features are in place, but there is room for improvement in the depth of CVE scanning, the comprehensiveness of web reconnaissance,and the level of integration with CI/CD platforms.
+
+
+--------
+
+
+2. Ինչն է դեռ հստակ պակասում
+Սա հիմնական մասն է։
+A. Infrastructure security audit դեռ ամբողջությամբ չկա
+Խնդրի դրվածքում կա.
+ենթակառուցվածքների անվտանգության աուդիտ
+analyze deployed infrastructure
+common misconfigurations, exposed assets, known vulnerabilities
+Քո current state-ից չի երևում, որ գործիքը իրականում անում է՝
+live host enumeration,
+open ports/service detection,
+exposed admin panels discovery,
+deployed Jenkins/GitLab instance fingerprinting,
+infrastructure endpoint checks,
+cloud misconfiguration scanning։
+Այսինքն հիմա PipeScope-ը ավելի շատ repository/static scanner է, ոչ թե լիարժեք repo + deployed infrastructure auditor։
+Այս հատվածում պակասում է
+target URL / host scanning mode
+service fingerprinting
+HTTP/HTTPS endpoint checks
+exposed CI/CD services detection on deployed infra
+reachable Jenkins/GitLab surfaces enumeration
+public exposure audit
+B. Penetration testing enablement դեռ բացակայում է
+Խնդրի դրվածքում հստակ գրված է՝
+ներթափանցման թեստավորման ապահովում
+Սա չի նշանակում full exploit framework պարտադիր, բայց գոնե պետք է ունենաս pentest-oriented checks, օրինակ՝
+safe validation of exposed endpoints,
+security probing of Jenkins/GitLab public interfaces,
+weak configuration verification,
+optional authenticated/unauthenticated checks։
+Քո current description-ում կա միայն CVE lookup, բայց չկա՝
+controlled validation workflows,
+reconnaissance modes,
+endpoint probing logic,
+pentest-safe scan modes,
+scope limiting and ethical guardrails։
+Այսինքն pentesting support-ը որպես capability դեռ փաստացի ամբողջական չի երևում։
+C. Web-based recon գրեթե բացակայում է
+Problem statement-ում կա.
+Web-based Recon
+directory brute-forcing behavior
+enumerate exposed .env, .git, .DS_Store, etc.
+Քո current state-ում սա չեմ տեսնում որպես իրականացված module։
+Պետք է ավելացնես
+web target mode (pipescope scan https://target)
+common exposed paths checks:
+/.git/
+/.env
+/.DS_Store
+/backup.zip
+/config.php.bak
+/jenkins/
+/login
+/cli
+/script
+directory enumeration logic
+rate limiting / safe mode
+response classification
+Սա շատ կարևոր gap է, որովհետև problem statement-ի ամենաօպերացիոն կետերից մեկն է։
+D. Accessible Jenkins dashboard / risky endpoints checks չեն երևում
+Պահանջներից մեկը սա է՝
+Check for accessible Jenkins dashboards (/script, /cli, /login, etc.)
+weak configuration endpoints
+Քո description-ում Jenkinsfile scan կա, բայց դա repo-level Jenkins pipeline file analysis է, ոչ թե live Jenkins instance enumeration։
+Missing
+Jenkins endpoint probing
+anonymous access detection
+script console exposure checks
+CLI exposure detection
+login surface identification
+version fingerprinting + CVE correlation
+E. GitLab/Jenkins version-based CVE testing դեռ ամբողջական չէ
+Դու հիմա անում ես Docker FROM image-ի համար NVD lookup։ Բայց պահանջը ասում է՝
+Use known CVEs to test Jenkins, GitLab versions, and weak configuration endpoints
+Այսինքն պետք է լինի նաև՝
+service version extraction,
+version normalization,
+CVE matching against detected product/version,
+product-aware CVE mapping։
+Օրինակ
+ոչ թե միայն nginx:1.25 կամ ubuntu:22.04,
+այլ նաև՝
+Jenkins 2.x
+GitLab CE/EE version
+plugin versions
+runner versions
+self-hosted agents if detectable
+F. Source code repositories and deployed infrastructure together դեռ լրիվ չի փակվում
+Քո tool-ը հիմա, ըստ նկարագրության, ավելի ուժեղ է repository-ում։
+Բայց խնդիրը պահանջում է երկուսը միասին.
+analyze source code repositories
+analyze deployed infrastructure
+Այս երկակի ճարտարապետությունը պետք է ավելի հստակ լինի.
+Պետք է ունենաս առանձին scan modes
+repo mode
+web mode
+infra mode
+hybrid mode
+Օրինակ՝
+pipescope scan ./repo
+pipescope scan https://target.example.com
+pipescope scan --host jenkins.example.com
+pipescope scan --repo ./repo --web https://app.example.com
+G. Structured PDF security report դեռ չկա կամ փաստացի չի հաստատվել
+Problem statement-ում կա.
+Generate a structured PDF security report
+Քո current state-ում երևում է JSON output, բայց ոչ PDF generation implementation։
+Missing
+report renderer
+PDF export
+severity summary
+executive summary
+findings table
+remediation section
+appendices / evidence snapshots
+Եթե սա դեռ իրական կոդով չկա, ապա սա direct missing requirement է։
+H. Recommendations / remediation logic դեռ թույլ է
+Թեև model-ում ունես recommendation, բայց խնդրի դրվածքի մակարդակով պետք է remediation-ները լինեն ավելի համակարգված.
+Պետք է լինի
+finding-specific recommendations
+CI/CD-specific remediation
+Docker remediation
+secrets rotation guidance
+exposed endpoint containment guidance
+prioritization order
+Այսինքն ոչ միայն “Remove hardcoded secret”, այլ նաև՝
+rotate credentials,
+invalidate tokens,
+audit access logs,
+pin action SHA,
+restrict permissions,
+isolate runners,
+disable anonymous access։
+I. Optional CI/CD plugin / pipeline stage integration դեռ ամբողջապես պատրաստ չէ
+Problem statement-ում սա optional է, բայց եթե ուզում ես thesis/project-ը ուժեղ լինի, շատ կարևոր է։
+Պետք է ունենաս գոնե.
+GitHub Actions example
+GitLab CI example
+non-zero exit on high/critical findings
+SARIF or machine-readable CI output
+artifact upload-ready report
+Եթե միայն example YAML կա report-ում, բայց իրական integration behavior չկա, ապա սա դեռ ամբողջական feature չէ։
+J. Tests շատ են պակասում
+Քո current state-ում նույնիսկ դու ինքդ գրել ես, որ unit tests պետք է ավելացնել։
+Խնդրի դրվածքի համար սա կարևոր է, որովհետև otherwise դժվար է ապացուցել գործիքի reliability-ը։
+Պետք են գոնե
+model serialization tests
+rule engine CVE propagation tests
+Dockerfile parser tests
+CI/CD detector tests
+false-positive / false-negative oriented tests
+web recon safe checks tests
+report generation tests
+K. Deep repository analysis դեռ պետք է ընդլայնել
+Խնդրի դրվածքում կա.
+repositories and applications deep analysis
+Հիմա ունես secrets + Docker + CI/CD files, բայց deep repo analysis-ը կարելի է համարել թերի, եթե դեռ չկա՝
+IaC scanning (.tf, terragrunt.hcl, k8s manifests),
+dependency manifest review (requirements.txt, package.json, pom.xml, go.mod),
+insecure config discovery,
+exposed tokens in history or ignored files,
+permission issues in workflow definitions,
+artifact poisoning risks,
+self-hosted runner risks։
+L. Risk assessment logic for CI/CD links դեռ թույլ է ֆորմալացման տեսանկյունից
+Խնդրի դրվածքում գրված է՝
+CI/CD կապերի ռիսկերի գնահատում
+Սա միայն presence detection չէ։ Պետք է լինի risk model, օրինակ՝
+trust boundary violations,
+third-party action trust risks,
+unpinned actions,
+excessive token permissions,
+secret exposure to PRs from forks,
+artifact reuse risk,
+runner compromise risk,
+deployment credential propagation path։
+Լավ կլինի ավելացնել risk scoring framework
+օրինակ՝
+likelihood
+impact
+exploitability
+exposure
+confidence
+M. Finding evidence enrichment դեռ կարելի է ուժեղացնել
+Հիմա evidence-ը հիմնականում file/path-oriented է թվում։
+Բայց problem statement-ին ավելի համապատասխան լինելու համար evidence-ը պետք է ներառի նաև՝
+matched line numbers,
+matched snippet,
+URL endpoint,
+HTTP status,
+detected service/version,
+response headers,
+CVE source and affected component,
+confidence score
+N. CLI and UX alignment with scope դեռ պետք է հստակեցնել
+Քո description-ում տարբեր տեղերում կա pipescope scan ... և ուրիշ տեղերում pipescope ./repo ...
+Պետք է վերջնականացնես CLI design-ը, օրինակ՝
+pipescope scan <target> --json out.json
+pipescope report out.json --pdf out.pdf
+pipescope scan <url> --mode web
+pipescope scan <path> --mode repo
+Սա կարևոր է, որովհետև project scope-ն արդեն static scanner-ից մեծ է դարձել։
+3. Ակադեմիական հաշվետվության մեջ էլ ինչ է պակասում
+Քո report draft-ը մեծ ծավալ ունի, բայց ըստ խնդրի դրվածքի և դիպլոմային աշխատանքի չափանիշների՝ այնտեղ ևս կան բացեր։
+Պակասում են
+հստակ research objectives
+functional requirements / non-functional requirements
+methodology
+test methodology
+evaluation on sample targets
+limitations
+ethical/legal scope
+comparison with baseline tools using measurable criteria
+results section with actual scan outputs
+performance benchmarks with real experiments
+false positive / false negative discussion
+Եվ շատ կարևոր բան՝ քո report-ի հայերենը շատ տեղերում ակնհայտորեն լեզվական խնդիրներ ունի, այսինքն այն հիմա thesis-ready չէ։
+4. Ամենակարևոր missing items-ը, շատ կարճ
+Եթե շատ սեղմեմ, ապա ըստ problem statement-ի ամենամեծ բացերը սրանք են՝
+Live infrastructure scanning
+Web recon module
+Jenkins/GitLab endpoint + version probing
+Real CI/CD risk assessment model
+PDF report generation
+Pentest-supporting safe probing
+Deployed infrastructure analysis
+Tests
+Broader deep repo analysis
+Production-ready CI integration
+5. Քո project-ը հիմա ինչ փուլում է
+Հիմա PipeScope-ը ավելի ճիշտ կարելի է նկարագրել այսպես՝
+A static/semi-dynamic CI/CD and repository security scanner with early CVE enrichment support
+Բայց խնդրի դրվածքը պահանջում է սա՝
+A broader security enumeration and assessment platform for both repositories and deployed DevOps/CI/CD infrastructure
+Այսինքն direction-ը ճիշտ է, բայց scope-ի զգալի մասը դեռ չես փակել։

@@ -1,0 +1,33 @@
+https://docs.github.com/en/actions/reference/security/secure-use?utm_source=chatgpt.com. cicd best practice
+
+https://github.com/GamerPolls/gamerpolls.com/pull/56/commits. 
+
+https://github.com/sheepkiller/kafka-manager-docker. docker
+
+https://github.com/bboysoulcn/awesome-dockercompose.  docker-compose
+
+https://github.com/shsuishang/modulithshop 
+
+https://github.com/OWASP/NodeGoat
+
+https://github.com/juice-shop/juice-shop
+
+https://github.com/digininja/DVWA
+
+https://github.com/github/advisory-database
+
+https://github.com/ossf/scorecard
+
+https://github.com/snoopysecurity/Vulnerable-Docker-Containers
+
+https://github.com/trailofbits/vulnerable-python-project
+
+pipescope https://github.com/juice-shop/juice-shop --json results_cve_test.json
+
+
+https://github.com/bitnami/charts  -> good k8s manidests
+
+https://github.com/BishopFox/badPods -> bad 8s manifests
+
+
+https://github.com/kubescape/kubescape.  -> existing k8s security scanner

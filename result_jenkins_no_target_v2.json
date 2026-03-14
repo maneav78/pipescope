@@ -1,0 +1,128 @@
+{
+  "tool": "PipeScope",
+  "version": "0.1.0",
+  "target": "(no local target)",
+  "metadata": {
+    "mode": "remote-only"
+  },
+  "findings": [
+    {
+      "id": "PIPESCOPE-JENKINS-CVE-001",
+      "title": "Potential Jenkins CVE: CVE-2011-4344",
+      "severity": "High",
+      "description": "A potential vulnerability (CVE-2011-4344) was found for Jenkins version 2.516.1. Please investigate further.",
+      "evidence": {
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2011-4344",
+        "version": "2.516.1"
+      },
+      "recommendation": "Upgrade Jenkins to the latest version and review the CVE details at https://nvd.nist.gov/vuln/detail/CVE-2011-4344",
+      "cves": [
+        {
+          "id": "CVE-2011-4344",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2011-4344"
+        }
+      ]
+    },
+    {
+      "id": "PIPESCOPE-JENKINS-CVE-001",
+      "title": "Potential Jenkins CVE: CVE-2012-0324",
+      "severity": "High",
+      "description": "A potential vulnerability (CVE-2012-0324) was found for Jenkins version 2.516.1. Please investigate further.",
+      "evidence": {
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2012-0324",
+        "version": "2.516.1"
+      },
+      "recommendation": "Upgrade Jenkins to the latest version and review the CVE details at https://nvd.nist.gov/vuln/detail/CVE-2012-0324",
+      "cves": [
+        {
+          "id": "CVE-2012-0324",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2012-0324"
+        }
+      ]
+    },
+    {
+      "id": "PIPESCOPE-JENKINS-CVE-001",
+      "title": "Potential Jenkins CVE: CVE-2012-0325",
+      "severity": "High",
+      "description": "A potential vulnerability (CVE-2012-0325) was found for Jenkins version 2.516.1. Please investigate further.",
+      "evidence": {
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2012-0325",
+        "version": "2.516.1"
+      },
+      "recommendation": "Upgrade Jenkins to the latest version and review the CVE details at https://nvd.nist.gov/vuln/detail/CVE-2012-0325",
+      "cves": [
+        {
+          "id": "CVE-2012-0325",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2012-0325"
+        }
+      ]
+    },
+    {
+      "id": "PIPESCOPE-JENKINS-CVE-001",
+      "title": "Potential Jenkins CVE: CVE-2012-6072",
+      "severity": "High",
+      "description": "A potential vulnerability (CVE-2012-6072) was found for Jenkins version 2.516.1. Please investigate further.",
+      "evidence": {
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2012-6072",
+        "version": "2.516.1"
+      },
+      "recommendation": "Upgrade Jenkins to the latest version and review the CVE details at https://nvd.nist.gov/vuln/detail/CVE-2012-6072",
+      "cves": [
+        {
+          "id": "CVE-2012-6072",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2012-6072"
+        }
+      ]
+    },
+    {
+      "id": "PIPESCOPE-JENKINS-CVE-001",
+      "title": "Potential Jenkins CVE: CVE-2012-6073",
+      "severity": "High",
+      "description": "A potential vulnerability (CVE-2012-6073) was found for Jenkins version 2.516.1. Please investigate further.",
+      "evidence": {
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2012-6073",
+        "version": "2.516.1"
+      },
+      "recommendation": "Upgrade Jenkins to the latest version and review the CVE details at https://nvd.nist.gov/vuln/detail/CVE-2012-6073",
+      "cves": [
+        {
+          "id": "CVE-2012-6073",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2012-6073"
+        }
+      ]
+    },
+    {
+      "id": "PIPESCOPE-JENKINS-001",
+      "title": "Exposed Jenkins Endpoint: login",
+      "severity": "Medium",
+      "description": "A potentially sensitive Jenkins endpoint was found at http://localhost:8080/login",
+      "evidence": {
+        "url": "http://localhost:8080/login"
+      },
+      "recommendation": "Ensure that only authorized users have access to this endpoint. Review your Jenkins security configuration.",
+      "cves": []
+    },
+    {
+      "id": "PIPESCOPE-JENKINS-001",
+      "title": "Exposed Jenkins Endpoint: whoAmI/",
+      "severity": "Medium",
+      "description": "A potentially sensitive Jenkins endpoint was found at http://localhost:8080/whoAmI/",
+      "evidence": {
+        "url": "http://localhost:8080/whoAmI/"
+      },
+      "recommendation": "Ensure that only authorized users have access to this endpoint. Review your Jenkins security configuration.",
+      "cves": []
+    },
+    {
+      "id": "PIPESCOPE-JENKINS-001",
+      "title": "Exposed Jenkins Endpoint: jnlpJars/jenkins-cli.jar",
+      "severity": "Medium",
+      "description": "A potentially sensitive Jenkins endpoint was found at http://localhost:8080/jnlpJars/jenkins-cli.jar",
+      "evidence": {
+        "url": "http://localhost:8080/jnlpJars/jenkins-cli.jar"
+      },
+      "recommendation": "Ensure that only authorized users have access to this endpoint. Review your Jenkins security configuration.",
+      "cves": []
+    }
+  ]
+}
