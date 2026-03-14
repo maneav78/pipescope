@@ -19,7 +19,16 @@ dependencies = [
 [project.scripts]
 pipescope = "pipescope.cli:main"
 
+[tool.setuptools]
+include-package-data = true
+
 [tool.setuptools.packages.find]
 include = ["pipescope*"]
 exclude = ["repos*"]
+
+[tool.setuptools.package-data]
+pipescope = [
+  "rules/*.toml",
+  "wordlists/*.txt",
+]
 
