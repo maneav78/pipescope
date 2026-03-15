@@ -123,7 +123,7 @@ PipeScope-ի տարբերակված արժեքը կայանում է ** շրջա
        ▼                ▼
 ┌──────────────┐  ┌───────────────────────────────────────────────────┐
 │ REMOTE SCANS │  │                  LOCAL SCANS                      │
-│              │  │                                                    │
+│              │  │                                                   │
 │ Jenkins      │  │  ┌──────────────────────────────────────────────┐ │
 │  Fingerprint │  │  │  CI/CD Detector (cicd_detector.py)           │ │
 │  Endpoint    │  │  │  ├── GHA Observation Extractor               │ │
@@ -139,7 +139,7 @@ PipeScope-ի տարբերակված արժեքը կայանում է ** շրջա
 │  Wordlist    │  │  │  weak_secrets.py (assignment patterns)       │ │
 │  Enumeration │  │  └──────────────────────────────────────────────┘ │
 └──────────────┘  │  ┌──────────────────────────────────────────────┐ │
-                  │  │  Infrastructure Scanners                      │ │
+                  │  │  Infrastructure Scanners                     │ │
                   │  │  ├── dockerfile_scanner.py                   │ │
                   │  │  ├── dockerignore_scanner.py                 │ │
                   │  │  ├── compose_scanner.py                      │ │
